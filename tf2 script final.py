@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import websocket
 import _thread
 import time
