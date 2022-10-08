@@ -21,7 +21,7 @@ def on_message(ws, message):
     me1 = me["name"]    
     qualityy = me["quality"]
     quality = qualityy["id"]
-    if(quality==5):
+    if(quality==5 and (item_intent=="sell")):
 
         particles = me["particle"]
         particle = particles["name"]
@@ -39,11 +39,11 @@ def on_message(ws, message):
         float_50 = float(45)
         user_id = str(user__id)
         payload = {
-	    'content':  f"@AShyRag#2695, item: {me1}. Item price is {raw_price/float_50}, intent is: {item_intent}"
+	    'content':  f"@AShyRag#2695 , item: {me1}. Item price is {raw_price/float_50}, intent is: {item_intent}"
           }
         header = {
             #Mjk2MjUxODg0OTkyNDYyODUw.G1rIDt.PCxnmRi3xkStFoRjas7EbInqI8j5G-ibIYAms8
-	      'authorization': "Mjk2MjUxODg0OTkyNDYyODUw.G1rIDt.PCxnmRi3xkStFoRjas7EbInqI8j5G-ibIYAms8"
+	      'authorization': "MjU4MDg2NTI1MjUyNjY1MzQ1.G6uJiQ.hrjB30vzCTJBLtG-OVQ3KJ1itaSRep5SWcXI8Q"
             }
         blacklist_names = ["Pumpkin Moon Beanie The All-Gnawing","Frozen Icefall Citizen Cane",  "Pumpkin Moon Towering Patch of Pumpkins", "Ominous Stare Beanie The All-Gnawing", "Pumpkin Moon Twisted Topper", "Holiday Horns Reindoonihorns"
         "Special Snowfall Jolly Jingler", "Ardent Antlers Jolly Jingler"
@@ -51,7 +51,7 @@ def on_message(ws, message):
         
 
         ]
-        if (effect in effect_list)and (raw_price>2500)and(item_intent=="sell")and (user_id not in blacklist)and (me1 not in blacklist_names):
+        if (effect in effect_list)and (raw_price>2500)and (user_id not in blacklist)and (me1 not in blacklist_names):
             r = requests.post("https://discord.com/api/v9/channels/1026466334759997525/messages", 
                   data = payload, headers=header)
 #blacklist:  76561198795826430 76561198453530349  76561199072654974 
@@ -66,7 +66,7 @@ def on_open(ws):
     print("Opened connection")
 
 if __name__ == "__main__":
-    websocket.enableTrace(False)
+    websocket.enableTrace(True)
     ws = websocket.WebSocketApp("wss://ws.backpack.tf/events",
                               on_message=on_message,
                               on_error=on_error,
