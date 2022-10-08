@@ -68,7 +68,7 @@ def on_open(ws):
     print("Opened connection")
 
 if __name__ == "__main__":
-    websocket.enableTrace(False)
+    websocket.enableTrace(True)
     ws = websocket.WebSocketApp("wss://ws.backpack.tf/events",
                               on_message=on_message,
                               on_error=on_error,
